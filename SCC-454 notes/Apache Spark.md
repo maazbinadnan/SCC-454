@@ -39,3 +39,38 @@ This enables us to do three things:
 1. Optimize execution plan
 2. Reduce unnecessary computation
 3. Enables fault tolerance
+
+> [!info] Before starting we need to establish a spark session
+
+```
+# Create a SparkSession configured for data preprocessing
+spark = SparkSession.builder \
+    .appName("SCC454-DataPreprocessing") \
+    .config("spark.driver.memory", "4g") \
+    .config("spark.sql.legacy.timeParserPolicy", "LEGACY") \
+    .config("spark.ui.port", "4050") \
+    .getOrCreate()
+
+# Get the underlying SparkContext
+sc = spark.sparkContext
+```
+
+## 1.3 Overview of Spark's Data Cleaning Capabilities
+
+Spark provides several modules and functions for data preprocessing:
+
+**Key Modules:**
+- `pyspark.sql.functions`: Built-in functions for transformations
+- `pyspark.sql.types`: Data type definitions
+- `pyspark.ml.feature`: Feature engineering tools
+
+**Important Function Categories:**
+
+| Category | Functions |
+|----------|----------|
+| Null Handling | `isNull()`, `isNotNull()`, `na.drop()`, `na.fill()` |
+| String Functions | `lower()`, `upper()`, `trim()`, `split()`, `concat()` |
+| Regex Functions | `regexp_extract()`, `regexp_replace()`, `rlike()` |
+| Type Conversion | `cast()`, `to_date()`, `to_timestamp()` |
+| Aggregation | `count()`, `avg()`, `sum()`, `mean()` |
+| Conditional | `when()`, `otherwise()`, `coalesce()` |

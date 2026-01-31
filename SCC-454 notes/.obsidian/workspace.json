@@ -62,9 +62,23 @@
               "icon": "lucide-file",
               "title": "PySpark Quantile vs Percentile"
             }
+          },
+          {
+            "id": "643d69b4d96feb38",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Week 13 - Databases.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Week 13 - Databases"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -226,10 +240,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "9a6041de3593057d",
+  "active": "fc064a8a0775ed89",
   "lastOpenFiles": [
-    "PySpark Code Snippets.md",
+    "Images/Pasted image 20260130144221.png",
     "PySpark Quantile vs Percentile.md",
+    "Week 13 - Databases.md",
+    "PySpark Code Snippets.md",
     "Apache Spark.md",
     "Images",
     "Images/Pasted image 20260121112925.png",

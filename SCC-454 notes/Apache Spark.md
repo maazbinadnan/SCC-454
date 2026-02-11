@@ -26,14 +26,14 @@ Immutable and Lazy, aka they can't be changed and data is only transformed if an
 | `groupByKey()`      | Groups all values associated with the same key into a single sequence.                                                                                        |
 | `sortBy(func)`      | Returns an RDD sorted by the given function.                                                                                                                  |
 
-|**Action**|**Description**|
-|---|---|
-|`collect()`|Returns all elements of the RDD to the driver program as an array. (Use with caution on large datasets!)|
-|`count()`|Returns the total number of elements in the RDD.|
-|`first()`|Returns the first element of the RDD.|
-|`take(n)`|Returns an array containing the first $n$ elements of the RDD.|
-|`reduce(func)`|Aggregates the elements of the RDD using a function (which takes two arguments and returns one).|
-|`saveAsTextFile(path)`|Writes the elements of the dataset as a text file in a given directory in the local filesystem, HDFS, or any other Hadoop-supported file system.|
+| **Action**             | **Description**                                                                                                                                                                                                 |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `collect()`            | Returns all elements of the RDD to the driver program as an array. It returns all the elements as a ***row()*** which is a built-in  (Use with caution on large datasets as it loads all the data into memory!) |
+| `count()`              | Returns the total number of elements in the RDD.                                                                                                                                                                |
+| `first()`              | Returns the first element of the RDD.                                                                                                                                                                           |
+| `take(n)`              | Returns an array containing the first $n$ elements of the RDD.                                                                                                                                                  |
+| `reduce(func)`         | Aggregates the elements of the RDD using a function (which takes two arguments and returns one).                                                                                                                |
+| `saveAsTextFile(path)` | Writes the elements of the dataset as a text file in a given directory in the local filesystem, HDFS, or any other Hadoop-supported file system.                                                                |
 Since computation is lazy, the commands don't execute immediately. Instead sparks builds a DAG (Directed Acyclic Graph) of transformations. Hence, computation happens when an action is called. 
 This enables us to do three things:
 1. Optimize execution plan
@@ -66,11 +66,38 @@ Spark provides several modules and functions for data preprocessing:
 
 **Important Function Categories:**
 
-| Category | Functions |
-|----------|----------|
-| Null Handling | `isNull()`, `isNotNull()`, `na.drop()`, `na.fill()` |
+| Category         | Functions                                             |
+| ---------------- | ----------------------------------------------------- |
+| Null Handling    | `isNull()`, `isNotNull()`, `na.drop()`, `na.fill()`   |
 | String Functions | `lower()`, `upper()`, `trim()`, `split()`, `concat()` |
-| Regex Functions | `regexp_extract()`, `regexp_replace()`, `rlike()` |
-| Type Conversion | `cast()`, `to_date()`, `to_timestamp()` |
-| Aggregation | `count()`, `avg()`, `sum()`, `mean()` |
-| Conditional | `when()`, `otherwise()`, `coalesce()` |
+| Regex Functions  | `regexp_extract()`, `regexp_replace()`, `rlike()`     |
+| Type Conversion  | `cast()`, `to_date()`, `to_timestamp()`               |
+| Aggregation      | `count()`, `avg()`, `sum()`, `mean()`                 |
+| Conditional      | `when()`, `otherwise()`, `coalesce()`                 |
+>[!important] Both Dataframes and RDDs in spark are immutable.
+
+## (Un) Common Spark Functions 
+
+| Function                        | What it does                                                                                                |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `concat_ws(separator,*columns)` | Concatenates multiple input string columns together into a single string column, using the given separator. |
+| `explode(col,column)`           | takes an array column and turns each element into a row                                                     |
+| `lit(value)`                    | literal value                                                                                               |
+| `substring(value)`              | basically same as normal substring                                                                          |
+| `array_distinct(array)`         | takes a single array and keeps distinct only                                                                |
+| `array_union(arrays)`           | takes multiple arrays and keeps all the values                                                              |
+| `broadcast(value)`              | sends a value to all clusters                                                                               |
+
+
+## Regex
+| Pattern | Meaning            |
+| ------- | ------------------ |
+| `\d`    | Any digit (0-9)    |
+| `\w`    | Any word character |
+| `\s`    | Any whitespace     |
+| `.`     | Any character      |
+| `*`     | Zero or more       |
+| `+`     | One or more        |
+| `[]`    | Character class    |
+| `()`    | Capture group      |
+
